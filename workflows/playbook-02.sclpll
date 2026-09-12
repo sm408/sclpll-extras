@@ -1,0 +1,35 @@
+# Playbook 2: two sources, joined.
+#
+# `docs/playbooks/02-joining-sources.md` walks through this. It runs in CI.
+
+@workflow playbook-02 "An API joined with a local database"
+
+@var base = "http://127.0.0.1:0"
+@var db = "playbook-02.sqlite"
+
+@output report:json
+
+@step remote
+  get {{base}}/paged
+  paginate cursor cursor_path=next param=cursor max_pages=40
+
+@step shaped
+  flatten @remote.body
+
+@step seed
+  sqlite.write [{"id": 1, "note": "one"}, {"id": 3, "note": "three"}] {{db}} local
+
+@step local <- seed
+  sqlite.query {{db}} "select id, note from local order by id"
+
+@step joined
+  join @local @shaped id how=left
+
+@step stored
+  sqlite.write @joined {{db}} enriched
+
+@step verified <- stored
+  sqlite.query {{db}} "select id, note from enriched order by id"
+
+@step write -> report
+  save_json @verified

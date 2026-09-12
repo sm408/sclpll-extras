@@ -1,0 +1,100 @@
+@workflow orders "Fetch orders, enrich them, and write a report"
+
+@var base = "https://api.example.com"
+@var page_size = 100
+
+@input customers:csv
+@output report:csv
+@output archive:json
+
+@limits concurrency=8 host_concurrency=4 timeout=20
+
+@rule fetched_ok = @fetch_orders.status == 200
+@rule has_rows = count(@shape_orders) > 0
+
+@mode partial "Skip enrichment and reporting"
+  include fetch_* shape_* merge_* write_*
+  limit max_pages=1
+
+@mode full all
+
+@mode smoke
+  include fetch_orders
+  limit max_pages=1
+
+@step fetch_orders
+  get {{base}}/orders
+  query limit={{page_size}}
+  paginate cursor cursor_path=next_cursor param=cursor max_pages=40
+  retry 3
+  tag api
+  assert fetched_ok
+
+@step fetch_customers
+  get {{base}}/customers
+  query limit={{page_size}}
+  retry 3
+  tag api
+
+@step fetch_products
+  get {{base}}/products
+  retry 2
+  tag api
+
+@step fetch_regions
+  get {{base}}/regions
+  tag api
+
+@step shape_orders
+  explode @fetch_orders.body lines
+
+@step shape_customers
+  flatten @fetch_customers.body
+
+@step shape_products
+  rename @fetch_products.body {"sku": "lines_sku"}
+
+@step shape_regions
+  rename @fetch_regions.body {"region_id": "customer_region_id"}
+
+@step merge_orders
+  join @shape_orders @shape_customers customer_id how=left
+
+@step merge_products
+  join @merge_orders @shape_products lines_sku how=left
+
+@step merge_regions
+  join @merge_products @shape_regions customer_region_id how=left
+
+@step write_report -> report
+  save_csv @merge_regions
+  keep
+
+@step enrich_totals
+  let sum(@merge_regions, by="total")
+
+@step enrich_counts
+  let count(@merge_regions)
+
+@step enrich_average
+  let @enrich_totals / @enrich_counts
+
+@step report_header
+  let "Orders report"
+
+@step report_body
+  let @merge_regions
+
+@step report_footer
+  let "{{@enrich_counts}} orders totalling {{@enrich_totals}}"
+
+@step report_assemble
+  merge {"header": @report_header} {"footer": @report_footer}
+
+@step notify
+  post {{base}}/notifications
+  body {"text": "{{@report_footer}}"}
+  tag api
+
+@step archive -> archive
+  save_json @report_assemble

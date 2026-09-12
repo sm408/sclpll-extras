@@ -1,0 +1,19 @@
+# Branch on a data quality check.
+
+@workflow 08-branching-quality-gate "Write the good path only when enough rows exist"
+
+@output result:json
+
+@step rows
+  let [{"id": 1}, {"id": 2}, {"id": 3}]
+
+@step decision
+  when count(@rows) >= 3
+    step accepted
+      let {"status": "accepted", "rows": count(@rows)}
+    otherwise
+      step rejected
+        let {"status": "rejected", "rows": count(@rows)}
+
+@step write -> result
+  save_json @decision

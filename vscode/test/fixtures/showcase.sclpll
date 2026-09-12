@@ -1,0 +1,30 @@
+@workflow nightly-orders "Fetch, transform, and publish orders"
+@version 1
+
+@var base = "https://api.example.com"
+@input customers:csv
+@output report:parquet
+
+@rule healthy = @fetch.status == 200
+
+@mode smoke "Fast verification"
+  include fetch transform
+  limit max_pages=1
+
+@step fetch
+  get {{base}}/orders
+  header Accept: application/json
+  paginate cursor cursor_path=next param=cursor max_pages=20
+  retry 3 on=[429, 500, 503]
+
+@step transform <- fetch
+  flatten @fetch
+
+@step wait_after_transform <- transform
+  sleep 500
+
+@step score <- transform
+  python "scripts/score.py" input=@transform
+
+@step write <- score -> report
+  save_parquet @score

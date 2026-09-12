@@ -1,0 +1,28 @@
+# Playbook 1: a paginated API into a CSV.
+#
+# `docs/playbooks/01-paginated-api-to-csv.md` walks through this a piece at a time.
+# It runs in CI against the mock server, so the playbook cannot describe something
+# that does not work.
+
+@workflow playbook-01 "Every order, as a CSV"
+
+@var base = "http://127.0.0.1:0"
+
+@output report:csv
+
+@rule fetched_ok = @fetch.status == 200
+
+@mode smoke "One page, to check it is reachable"
+  include fetch
+  limit max_pages=1
+
+@step fetch
+  get {{base}}/paged
+  paginate cursor cursor_path=next param=cursor max_pages=40
+  assert fetched_ok
+
+@step checked
+  assert_rowcount @fetch.body.data min=1
+
+@step write -> report
+  save_csv @checked

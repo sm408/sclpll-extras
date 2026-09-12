@@ -1,0 +1,17 @@
+# Token pagination where the next token is sent as a header.
+
+@workflow 03-token-pagination "Use a response token as the next request header"
+
+@var base = "https://api.example.com"
+
+@output items:json
+
+@step fetch
+  get {{base}}/items
+  paginate token cursor_path=meta.next_token param=X-Next-Token max_pages=25
+
+@step checked
+  assert_rowcount @fetch.body.data min=1
+
+@step write -> items
+  save_json @checked

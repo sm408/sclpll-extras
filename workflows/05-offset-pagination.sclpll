@@ -1,0 +1,19 @@
+# Offset pagination with a known page size.
+
+@workflow 05-offset-pagination "Advance offset by size until the API returns short"
+
+@var base = "https://api.example.com"
+@var page_size = 250
+
+@output rows:csv
+
+@step fetch
+  get {{base}}/inventory
+  query limit={{page_size}}
+  paginate offset param=offset size=250 max_pages=30
+
+@step available
+  filter_rows @fetch.body.rows status equals="available"
+
+@step write -> rows
+  save_csv @available

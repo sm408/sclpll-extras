@@ -1,0 +1,27 @@
+# Local cleanup pipeline.
+
+@workflow 06-clean-and-profile "Fill nulls, filter, profile, and write both outputs"
+
+@output clean:csv
+@output profile:json
+
+@step raw
+  let [{"id": 1, "city": "Pune", "total": 12}, {"id": 2, "city": null, "total": null}, {"id": 3, "city": "Delhi", "total": 40}]
+
+@step filled
+  fill_nulls @raw {"city": "unknown", "total": 0}
+
+@step positive
+  filter_rows @filled total minimum=1
+
+@step numbered
+  row_number @positive column="line"
+
+@step write_clean -> clean
+  save_csv @numbered
+
+@step inspect
+  profile @numbered
+
+@step write_profile -> profile
+  save_json @inspect

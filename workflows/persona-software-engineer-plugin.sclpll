@@ -1,0 +1,20 @@
+# Software engineer workflow: use a bundled plugin to build stable labels.
+
+@workflow persona-software-engineer-plugin "Use the text plugin to build labels"
+
+@output labels:json
+
+@step raw
+  let [{"id": 101, "title": "Quarterly Revenue Report"}, {"id": 102, "title": "Customer Churn Watch"}, {"id": 103, "title": "North America Launch"}]
+
+@step extracted
+  text.extract @raw title "^(.+)$" into=label
+
+@step numbered
+  row_number @extracted column="position"
+
+@step rendered
+  text.template "{position}: {label}" @numbered
+
+@step write -> labels
+  save_json @rendered

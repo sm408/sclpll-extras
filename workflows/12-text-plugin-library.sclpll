@@ -1,0 +1,20 @@
+# Text plugin helpers plus file metadata.
+
+@workflow 12-text-plugin-library "Slug records and render labels"
+
+@output labels:json
+
+@step raw
+  let [{"id": 1, "title": "Quarterly Revenue Report"}, {"id": 2, "title": "Customer Churn Watch"}]
+
+@step slugs
+  text.extract @raw title "^(.+)$" into=label
+
+@step numbered
+  row_number @slugs
+
+@step rendered
+  text.template "{row_number}: {label}" @numbered
+
+@step write -> labels
+  save_json @rendered

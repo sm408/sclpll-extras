@@ -1,0 +1,20 @@
+# Join two sources and aggregate.
+
+@workflow 07-join-and-aggregate "Join reps to orders and aggregate by region"
+
+@output report:json
+
+@step orders
+  let [{"id": 1, "rep_id": 10, "region": "west", "total": 100}, {"id": 2, "rep_id": 11, "region": "east", "total": 75}, {"id": 3, "rep_id": 10, "region": "west", "total": 25}]
+
+@step reps
+  let [{"rep_id": 10, "rep": "Ada"}, {"rep_id": 11, "rep": "Grace"}]
+
+@step joined
+  join @orders @reps rep_id how=left
+
+@step grouped
+  group_agg @joined region agg={"total": "sum", "id": "count"}
+
+@step write -> report
+  save_json @grouped

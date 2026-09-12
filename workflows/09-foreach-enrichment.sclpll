@@ -1,0 +1,18 @@
+# Fan out over rows and collect the shaped values.
+
+@workflow 09-foreach-enrichment "Use foreach for bounded row enrichment"
+
+@output result:json
+
+@step ids
+  let [1, 2, 3, 4]
+
+@step doubled
+  foreach @ids as id
+    concurrency 2
+    collect {"id": @id, "score": @id * 10}
+    step score
+      let @id * 10
+
+@step write -> result
+  save_json @doubled

@@ -1,0 +1,8 @@
+[project]
+name = "sclpl-examples"
+
+[environments.default]
+
+[python.scripts.scorer]
+path = "13-python-script.py"
+sha256 = "1be5325ecfec17bd7e9fb7e5e2bcd2f7e402d9992347e920bbd4c8ffe1b94754"

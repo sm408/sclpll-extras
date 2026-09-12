@@ -1,0 +1,27 @@
+# Analyst workflow: filter trusted sales data and export a report.
+
+@workflow persona-analyst-report "Filter sales and export a report"
+
+@output report:csv
+@output profile:json
+
+@step raw
+  let [{"id": 1, "region": "west", "amount": 120.5, "status": "paid"}, {"id": 2, "region": "east", "amount": 80, "status": "pending"}, {"id": 3, "region": "west", "amount": 45, "status": "paid"}, {"id": 4, "region": "south", "amount": 210, "status": "paid"}]
+
+@step paid
+  filter_rows @raw status equals="paid"
+
+@step checked
+  assert_schema @paid {"id": "integer", "region": "string", "amount": "number", "status": "string"}
+
+@step counted
+  assert_rowcount @checked min=1
+
+@step write_report -> report
+  save_csv @counted
+
+@step inspect
+  profile @counted
+
+@step write_profile -> profile
+  save_json @inspect

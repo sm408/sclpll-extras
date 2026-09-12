@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# Node / VS Code build outputs
+vscode/node_modules/
+vscode/out/
+vscode/.vscode-test/
+vscode/*.vsix
+*.log

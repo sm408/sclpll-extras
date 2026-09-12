@@ -1,0 +1,23 @@
+# Data engineer workflow: paginate an API, flatten records, validate, and export.
+
+@workflow persona-data-engineer-api "Paginate an API into a checked CSV"
+
+@var base = "http://127.0.0.1:8765"
+
+@output report:csv
+
+@step fetch
+  get {{base}}/orders
+  paginate cursor cursor_path=next param=cursor max_pages=5
+
+@step shaped
+  flatten @fetch.body
+
+@step checked
+  assert_schema @shaped {"id": "integer", "customer_name": "string", "amount": "number"}
+
+@step counted
+  assert_rowcount @checked min=1
+
+@step write -> report
+  save_csv @counted

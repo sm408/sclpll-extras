@@ -1,0 +1,14 @@
+# Minimal API call with JSON output.
+
+@workflow 01-http-to-json "Fetch one endpoint and write the response body"
+
+@var base = "https://api.example.com"
+
+@output response:json
+
+@step fetch_status
+  get {{base}}/status
+  assert @fetch_status.status == 200
+
+@step write -> response
+  save_json @fetch_status.body

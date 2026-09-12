@@ -1,0 +1,10 @@
+.gitignore
+.eslintrc.json
+eslint.config.mjs
+node_modules/**
+src/**
+test/**
+_npm-ci.log
+**/*.map
+out/test/**
+*.vsix

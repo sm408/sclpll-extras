@@ -1,0 +1,17 @@
+# RFC Link-header pagination.
+
+@workflow 04-link-header-pagination "Follow Link rel=next"
+
+@var base = "https://api.example.com"
+
+@output report:csv
+
+@step fetch
+  get {{base}}/events
+  paginate link_header max_pages=20
+
+@step numbered
+  row_number @fetch.body.data
+
+@step write -> report
+  save_csv @numbered

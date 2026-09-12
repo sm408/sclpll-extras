@@ -1,0 +1,22 @@
+# Cursor pagination into a normalized CSV.
+
+@workflow 02-cursor-pagination "Follow next_cursor and write all rows"
+
+@var base = "https://api.example.com"
+
+@output rows:csv
+
+@mode smoke "One page only"
+  include fetch shape write
+  limit max_pages=1
+
+@step fetch
+  get {{base}}/orders
+  query limit=100
+  paginate cursor cursor_path=next_cursor param=cursor max_pages=40
+
+@step shape
+  normalize @fetch.body
+
+@step write -> rows
+  save_csv @shape

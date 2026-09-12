@@ -1,0 +1,20 @@
+{
+  "Workflow": { "prefix": "workflow", "body": ["@workflow ${1:name} \\\"${2:Description}\\\"", "@version 1", "", "${0}"], "description": "SCLPLL workflow" },
+  "Input": { "prefix": "input", "body": "@input ${1:data}:${2|csv,json,ndjson,parquet,xlsx|}" },
+  "Optional input": { "prefix": "input optional", "body": "@input ${1:data}:${2:json}?" },
+  "Output": { "prefix": "output", "body": "@output ${1:report}:${2:parquet}" },
+  "Variable": { "prefix": "var", "body": "@var ${1:name} = ${2:value}" },
+  "Rule": { "prefix": "rule", "body": "@rule ${1:healthy} = ${2:@step.status == 200}" },
+  "Limits": { "prefix": "limits", "body": "@limits concurrency=${1:8} timeout=${2:30}" },
+  "Mode": { "prefix": "mode", "body": ["@mode ${1:smoke} \\\"${2:Fast verification}\\\"", "  include ${3:step}", "  limit max_pages=${4:1}" ] },
+  "GET step": { "prefix": "get step", "body": ["@step ${1:fetch}", "  get ${2:https://api.example.com/items}", "  header Accept: application/json"] },
+  "POST step": { "prefix": "post step", "body": ["@step ${1:create}", "  post ${2:https://api.example.com/items}", "  body ${3:{}}"] },
+  "Function step": { "prefix": "function step", "body": ["@step ${1:transform} <- ${2:fetch}", "  ${3:flatten} @${2:fetch}"] },
+  "Python step": { "prefix": "python step", "body": ["@step ${1:score} <- ${2:transform}", "  python \\\"${3:scripts/score.py}\\\" input=@${2:transform}"] },
+  "Foreach": { "prefix": "foreach", "body": ["@step ${1:each} <- ${2:fetch}", "  foreach ${3:row} in @${2:fetch}", "    step ${4:work}", "      ${5:flatten} @${3:row}"] },
+  "While": { "prefix": "while", "body": ["@step ${1:repeat}", "  while ${2:@ready}", "    step ${3:work}", "      ${4:sleep} 500"] },
+  "Conditional": { "prefix": "when", "body": ["@step ${1:check}", "  when ${2:@ready}", "    step ${3:yes}", "      ${4:sleep} 100"] },
+  "Parallel": { "prefix": "parallel", "body": ["@step ${1:fanout}", "  parallel", "    branch", "      step ${2:left}", "        ${3:sleep} 100"] },
+  "Gate": { "prefix": "gate", "body": ["@step ${1:gate}", "  gate \\\"${2:All inputs ready}\\\""] },
+  "Output writing step": { "prefix": "write output", "body": ["@step ${1:write} <- ${2:transform} -> ${3:report}", "  save_parquet @${2:transform}"] }
+}

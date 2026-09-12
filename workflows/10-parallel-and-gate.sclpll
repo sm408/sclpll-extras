@@ -1,0 +1,23 @@
+# Parallel branches gathered behind a gate.
+
+@workflow 10-parallel-and-gate "Run independent branches and summarize"
+
+@output summary:json
+
+@step branches
+  parallel
+    branch
+      step left
+        let {"source": "left", "count": 2}
+    branch
+      step right
+        let {"source": "right", "count": 3}
+
+@step wait
+  gate "branches complete"
+
+@step total <- wait
+  let sum(@branches, by="count")
+
+@step write -> summary
+  save_json {"status": @wait, "total": @total}

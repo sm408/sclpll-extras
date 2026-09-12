@@ -1,0 +1,11 @@
+[plugin]
+name = "azure_blob"
+version = "0.9.1"
+api = "sclpl/1"
+module = "azure_blob"
+description = "Azure Blob Storage resource provider."
+capabilities = ["network", "secrets:read", "subprocess"]
+
+[[resource]]
+name = "azblob"
+summary = "Azure Blob Storage resources."

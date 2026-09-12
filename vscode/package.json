@@ -2,7 +2,7 @@
   "name": "sclpl-language-tools",
   "displayName": "SCLPL Language Support",
   "description": "First-class editing support for SCLPLL workflows.",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "publisher": "sclpl-local",
   "private": true,
   "engines": {

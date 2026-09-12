@@ -4,11 +4,11 @@ build-backend = "hatchling.build"
 
 [project]
 name = "sclpl-azure-blob"
-version = "0.9.1"
+version = "1.0.1"
 description = "Azure Blob Storage resource provider for SCLPL"
 requires-python = ">=3.11"
 dependencies = [
-    "sclpl>=0.9.1,<0.10",
+    "sclpl>=1.0.1,<1.1",
     "azure-identity>=1.17,<2",
     "azure-storage-blob>=12.22,<13",
 ]

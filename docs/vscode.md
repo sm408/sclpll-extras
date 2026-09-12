@@ -8,7 +8,7 @@ This repository ships the VS Code extension source tree in `vscode`. It recogniz
 Install the release wheel, then install the release VSIX using VS Code's **Extensions: Install from VSIX** command. No Node build is needed for users.
 
 ```powershell
-py -3.12 -m pip install https://github.com/sm408/sclpll-extras/releases/download/v0.1.0/sclpll_language_server-0.1.0-py3-none-any.whl
+py -3.12 -m pip install https://github.com/sm408/sclpll-extras/releases/download/v1.0.1/sclpll_language_server-1.0.1-py3-none-any.whl
 ```
 
 ## Develop

@@ -6,7 +6,7 @@ Plugins extend SCLPL through its public plugin API. They are optional and are ne
 
 | Plugin | Provides | Version |
 |---|---|---|
-| [`azure_blob`](azure_blob/) | `azblob` Azure Blob Storage resource provider | `0.9.1` |
+| [`azure_blob`](azure_blob/) | `azblob` Azure Blob Storage resource provider | `1.0.1` |
 
 Install a plugin from its release asset or package directory, configure credentials outside source control, then restart the SCLPL language server.
 

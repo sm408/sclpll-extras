@@ -6,13 +6,13 @@ SCLPL remains the language authority. This repository does **not** contain a sec
 
 ## Install
 
-1. Download and install `sclpll_language_server-0.1.0-py3-none-any.whl` from the [v0.1.0 release](https://github.com/sm408/sclpll-extras/releases/tag/v0.1.0):
+1. Download and install `sclpll_language_server-1.0.1-py3-none-any.whl` from the [v1.0.1 release](https://github.com/sm408/sclpll-extras/releases/tag/v1.0.1):
 
    ```powershell
-   py -3.12 -m pip install https://github.com/sm408/sclpll-extras/releases/download/v0.1.0/sclpll_language_server-0.1.0-py3-none-any.whl
+   py -3.12 -m pip install https://github.com/sm408/sclpll-extras/releases/download/v1.0.1/sclpll_language_server-1.0.1-py3-none-any.whl
    ```
 
-2. Download `sclpl-language-tools-0.1.0.vsix` from the same release and install it with VS Code's **Extensions: Install from VSIX** command.
+2. Download `sclpl-language-tools-1.0.1.vsix` from the same release and install it with VS Code's **Extensions: Install from VSIX** command.
 
 Open a `*.sclpll` workflow. Set `sclpl.pythonPath` only if VS Code selects a different Python environment.
 

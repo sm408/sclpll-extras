@@ -1,6 +1,6 @@
 [plugin]
 name = "azure_blob"
-version = "0.9.1"
+version = "1.0.1"
 api = "sclpl/1"
 module = "azure_blob"
 description = "Azure Blob Storage resource provider."

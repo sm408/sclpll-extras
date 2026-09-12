@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 .venv/
+.verify-venv/
 .pytest_cache/
 
 # Node / VS Code build outputs

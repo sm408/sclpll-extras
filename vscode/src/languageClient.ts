@@ -64,7 +64,7 @@ export class SclplClient {
   private async unavailable(): Promise<void> {
     if (this.shownUnavailable) return;
     this.shownUnavailable = true;
-    const action = await vscode.window.showWarningMessage("SCLPLL language server is unavailable in this Python environment. Install the SCLPL editor dependencies and sclpll-language-server.", "Retry", "Select Python");
+    const action = await vscode.window.showWarningMessage("SCLPLL language server is unavailable in this Python environment. From sclpll-extras, run: pip install -e language-server", "Retry", "Select Python");
     if (action === "Retry") await this.restart();
     if (action === "Select Python") await vscode.commands.executeCommand("python.setInterpreter");
   }

@@ -8,12 +8,15 @@ version = "0.0.0"
 description = "Launcher for the canonical SCLPL language server"
 requires-python = ">=3.11"
 dependencies = [
-    "sclpl>=0.9.1,<0.10",
+    "sclpl @ git+https://github.com/sm408/sclpl-api.git@main",
     "pygls>=2.1,<3",
 ]
 
 [project.scripts]
 sclpll-language-server = "sclpll_language_server:main"
+
+[tool.hatch.metadata]
+allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/sclpll_language_server"]

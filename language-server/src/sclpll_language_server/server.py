@@ -89,7 +89,7 @@ def create_server() -> Any:
         from lsprotocol import types
         from pygls.lsp.server import LanguageServer
     except ModuleNotFoundError as error:  # clear CLI error, never a JSON-RPC stdout leak
-        raise RuntimeError("SCLPLL language server requires: pip install sclpl pygls") from error
+        raise RuntimeError("SCLPLL language server requires: pip install -e language-server") from error
 
     server = LanguageServer("sclpl-language-server", __version__)
     store = AnalysisStore()

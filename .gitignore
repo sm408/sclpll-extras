@@ -11,3 +11,5 @@ vscode/out/
 vscode/.vscode-test/
 vscode/*.vsix
 *.log
+dist/
+dist-plugin-test/

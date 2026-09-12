@@ -4,11 +4,11 @@ build-backend = "hatchling.build"
 
 [project]
 name = "sclpll-language-server"
-version = "0.0.0"
+version = "0.1.0"
 description = "Launcher for the canonical SCLPL language server"
 requires-python = ">=3.11"
 dependencies = [
-    "sclpl @ git+https://github.com/sm408/sclpl-api.git@main",
+    "sclpl @ https://github.com/sm408/sclpl-api/releases/download/v0.9.2/sclpl-0.9.2-py3-none-any.whl",
     "pygls>=2.1,<3",
 ]
 

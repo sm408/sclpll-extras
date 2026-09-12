@@ -3,7 +3,15 @@
 This repository ships the VS Code extension source tree in `vscode`. It recognizes only
 `.sclpll` files as **SCLPLL**; JSON workflows intentionally remain JSON.
 
-## Install and develop
+## Install
+
+Install the release wheel, then install the release VSIX using VS Code's **Extensions: Install from VSIX** command. No Node build is needed for users.
+
+```powershell
+py -3.12 -m pip install https://github.com/sm408/sclpll-extras/releases/download/v0.1.0/sclpll_language_server-0.1.0-py3-none-any.whl
+```
+
+## Develop
 
 Install the optional server dependency in the same Python environment as SCLPL:
 

@@ -1,4 +1,4 @@
-# Python
+﻿# Python
 __pycache__/
 *.py[cod]
 .venv/
@@ -10,6 +10,9 @@ vscode/node_modules/
 vscode/out/
 vscode/.vscode-test/
 vscode/*.vsix
+node_modules/
+out/
+.vscode-test/
 *.log
 dist/
 dist-plugin-test/

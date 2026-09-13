@@ -1,0 +1,142 @@
+{
+  "name": "sclpl-language-tools",
+  "displayName": "SCLPL Language Support",
+  "description": "First-class editing support for SCLPLL workflows.",
+  "version": "0.0.0",
+  "publisher": "sclpl-local",
+  "private": true,
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Formatters"
+  ],
+  "activationEvents": [
+    "onLanguage:sclpll"
+  ],
+  "main": "./out/src/extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sm408/sclpl-api.git"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "sclpll",
+        "aliases": [
+          "SCLPLL",
+          "SCLPL Workflow"
+        ],
+        "extensions": [
+          ".sclpll"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "sclpll",
+        "scopeName": "source.sclpll",
+        "path": "./syntaxes/sclpll.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "sclpll",
+        "path": "./snippets/sclpll.json"
+      }
+    ],
+    "configuration": {
+      "title": "SCLPL",
+      "properties": {
+        "sclpl.pythonPath": {
+          "type": "string",
+          "default": "",
+          "description": "Python interpreter used for the SCLPL language server."
+        },
+        "sclpl.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Trace language-server protocol messages."
+        },
+        "sclpl.diagnostics.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable passive SCLPL diagnostics."
+        },
+        "sclpl.semanticHighlighting.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable SCLPL semantic highlighting."
+        }
+      }
+    },
+    "configurationDefaults": {
+      "[sclpll]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.formatOnSave": false
+      }
+    },
+    "commands": [
+      {
+        "command": "sclpl.validate",
+        "title": "SCLPL: Validate Workflow"
+      },
+      {
+        "command": "sclpl.run",
+        "title": "SCLPL: Run Workflow"
+      },
+      {
+        "command": "sclpl.explain",
+        "title": "SCLPL: Explain Workflow"
+      },
+      {
+        "command": "sclpl.format",
+        "title": "SCLPL: Format Workflow"
+      },
+      {
+        "command": "sclpl.graph",
+        "title": "SCLPL: Show Workflow Graph"
+      },
+      {
+        "command": "sclpl.restartServer",
+        "title": "SCLPL: Restart Language Server"
+      },
+      {
+        "command": "sclpl.showServerOutput",
+        "title": "SCLPL: Show Language Server Output"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint src test --ext .ts",
+    "compile": "tsc -p .",
+    "test": "npm run compile && node ./out/test/smoke.js && node ./out/test/runTest.js",
+    "package": "npx @vscode/vsce package --no-dependencies"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.95.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.2.0",
+    "eslint": "^9.0.0",
+    "glob": "^11.1.0",
+    "mocha": "^10.8.2",
+    "typescript": "^5.7.0",
+    "vscode-oniguruma": "^2.0.1",
+    "vscode-textmate": "^9.3.2"
+  }
+}

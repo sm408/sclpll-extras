@@ -1,0 +1,14 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "SCLPLL", "scopeName": "source.sclpll", "patterns": [{ "include": "#comments" }, { "include": "#directives" }, { "include": "#strings" }, { "include": "#references" }, { "include": "#keywords" }, { "include": "#formats" }, { "include": "#literals" }, { "include": "#operators" }],
+  "repository": {
+    "comments": { "patterns": [{ "name": "comment.line.number-sign.sclpll", "match": "#.*$" }] },
+    "directives": { "patterns": [{ "name": "keyword.control.directive.sclpll", "match": "(?<!\\w)@(workflow|version|description|default_mode|var|input|output|mode|rule|limits|step)\\b" }] },
+    "strings": { "patterns": [{ "name": "string.quoted.double.sclpll", "begin": "\\\"", "end": "\\\"", "patterns": [{ "name": "constant.character.escape.sclpll", "match": "\\\\." }, { "name": "meta.interpolation.sclpll", "match": "\\{\\{.*?\\}\\}" }] }, { "name": "string.quoted.single.sclpll", "begin": "'", "end": "'", "patterns": [{ "name": "constant.character.escape.sclpll", "match": "\\\\." }, { "name": "meta.interpolation.sclpll", "match": "\\{\\{.*?\\}\\}" }] }] },
+    "references": { "patterns": [{ "name": "variable.other.reference.sclpll", "match": "(?<!\\w)@[A-Za-z_][A-Za-z0-9_-]*(?:\\.[A-Za-z_][A-Za-z0-9_-]*)*" }] },
+    "keywords": { "patterns": [{ "name": "keyword.control.http.sclpll", "match": "\\b(get|post|put|patch|delete|head|options)\\b" }, { "name": "keyword.control.structure.sclpll", "match": "\\b(let|foreach|when|while|do_while|parallel|gate|branch|otherwise)\\b" }, { "name": "keyword.other.clause.sclpll", "match": "\\b(header|query|body|auth|paginate|timeout|extract|proxy|verify|stream|assert|retry|lane|tag|cache|keep|skip_if|retry_if|include|exclude|extends|describe|var|limit|stub|all)\\b" }] },
+    "formats": { "patterns": [{ "name": "support.type.format.sclpll", "match": "(?<=:)\\b(csv|json|ndjson|parquet|xlsx|sqlite|auto)\\b" }] },
+    "literals": { "patterns": [{ "name": "constant.numeric.sclpll", "match": "\\b\\d+(?:\\.\\d+)?\\b" }, { "name": "constant.language.sclpll", "match": "\\b(true|false|null)\\b" }] },
+    "operators": { "patterns": [{ "name": "keyword.operator.sclpll", "match": "<-|->|==|!=|>=|<=|[=+*/%<>-]" }] }
+  }
+}

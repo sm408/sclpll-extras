@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Example releases</title>
+    <link>https://example.com/</link>
+    <atom:link href="https://example.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Release notes and notices.</description>
+    <item>
+      <title>Release 1.2</title>
+      <link>https://example.com/posts/release-1-2</link>
+      <dc:creator>Release bot</dc:creator>
+      <dc:date>2026-09-01T09:30:00Z</dc:date>
+      <description>Faster parsing &amp; fewer surprises.</description>
+      <guid isPermaLink="false">urn:example:post:12</guid>
+    </item>
+    <item>
+      <dc:title>Security notice</dc:title>
+      <link>https://example.com/posts/notice</link>
+      <dc:date>2026-09-02T15:00:00+05:30</dc:date>
+      <content:encoded><![CDATA[Upgrade now.]]></content:encoded>
+      <dc:identifier>urn:example:post:13</dc:identifier>
+    </item>
+  </channel>
+</rss>

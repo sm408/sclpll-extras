@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Example releases</title>
+    <link>https://example.com/</link>
+    <description>Release notes and notices.</description>
+    <item>
+      <title>Release 1.2</title>
+      <link>https://example.com/posts/release-1-2</link>
+      <description>Faster parsing &amp; fewer surprises.</description>
+      <pubDate>Tue, 01 Sep 2026 09:30:00 GMT</pubDate>
+      <guid isPermaLink="false">urn:example:post:12</guid>
+    </item>
+    <item>
+      <title>Security notice</title>
+      <link>https://example.com/posts/notice</link>
+      <description><![CDATA[Upgrade now.]]></description>
+      <pubDate>Wed, 02 Sep 2026 15:00:00 +0530</pubDate>
+      <guid isPermaLink="false">urn:example:post:13</guid>
+    </item>
+  </channel>
+</rss>

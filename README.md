@@ -24,8 +24,8 @@ The extension recognizes `.sclpll` only. It never executes workflows, scripts, H
 |---|---|
 | [`vscode`](vscode/README.md) | VS Code extension source, TextMate grammar, snippets, and tests |
 | [`language-server`](language-server/README.md) | Installable SCLPLL Python language server |
-| [`plugins`](plugins/README.md) | Available plugin packages: `azure_blob` |
-| [`functions`](functions/README.md) | Available bundled functions and ordinary Python-script functions |
+| [`plugins`](plugins/README.md) | Available plugin packages: `azure_blob`, `feeds` |
+| [`functions`](functions/README.md) | Available bundled functions, plugin-provided functions, and ordinary Python-script functions |
 | [`workflows`](workflows/README.md) | SCLPLL workflow library |
 | [`docs`](docs/README.md) | Installation, security, and contributor documentation |
 

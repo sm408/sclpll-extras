@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Example releases</title>
+  <id>urn:example:feed</id>
+  <link rel="self" href="https://example.com/feed.atom"/>
+  <link rel="alternate" href="https://example.com/"/>
+  <updated>2026-09-02T15:00:00+05:30</updated>
+  <entry>
+    <title>Release 1.2</title>
+    <link rel="alternate" type="text/html" href="https://example.com/posts/release-1-2"/>
+    <id>urn:example:post:12</id>
+    <published>2026-09-01T09:30:00Z</published>
+    <updated>2026-09-01T10:00:00Z</updated>
+    <summary>Faster parsing &amp; fewer surprises.</summary>
+  </entry>
+  <entry>
+    <title type="text">Security notice</title>
+    <link href="/posts/notice"/>
+    <id>urn:example:post:13</id>
+    <updated>2026-09-02T15:00:00+05:30</updated>
+    <content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Upgrade now.</div></content>
+  </entry>
+</feed>

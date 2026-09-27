@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns="http://purl.org/rss/1.0/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel rdf:about="https://example.com/feed.rdf">
+    <title>Example releases</title>
+    <link>https://example.com/</link>
+    <description>Release notes and notices.</description>
+    <items>
+      <rdf:Seq>
+        <rdf:li rdf:resource="urn:example:post:12"/>
+        <rdf:li rdf:resource="urn:example:post:13"/>
+      </rdf:Seq>
+    </items>
+  </channel>
+  <item rdf:about="urn:example:post:12">
+    <title>Release 1.2</title>
+    <link>https://example.com/posts/release-1-2</link>
+    <description>Faster parsing &amp; fewer surprises.</description>
+    <dc:date>2026-09-01T09:30:00Z</dc:date>
+  </item>
+  <item rdf:about="urn:example:post:13">
+    <title>Security notice</title>
+    <link>https://example.com/posts/notice</link>
+    <content:encoded><![CDATA[Upgrade now.]]></content:encoded>
+    <dc:date>2026-09-02T15:00:00+05:30</dc:date>
+  </item>
+</rdf:RDF>

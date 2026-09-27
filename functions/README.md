@@ -12,4 +12,10 @@ The core SCLPL package continues to ship and register every built-in below. [`bu
 | Shape | `join`, `merge`, `concat`, `sort_by`, `dedupe`, `group_agg`, `pivot`, `select`, `rename`, `head`, `infer_schema`, `cast_schema` |
 | Python scripts | `python` |
 
+Plugins in [`../plugins`](../plugins/README.md) add namespaced connectors. They are not built in; install the plugin to use them.
+
+| Plugin | Available connectors |
+|---|---|
+| [`feeds`](../plugins/feeds/) | `feeds.rss_read`, `feeds.atom_read`, `feeds.feed_read`, `feeds.robots_allowed` |
+
 [`python-script/`](python-script/) contains the current ordinary-Python function asset. Such scripts receive JSON on stdin and emit JSON to stdout; they do not need to become plugins.

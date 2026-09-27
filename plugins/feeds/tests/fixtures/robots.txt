@@ -1,0 +1,8 @@
+# Recorded shape of a typical robots.txt.
+User-agent: badbot
+Disallow: /
+
+User-agent: *
+Disallow: /private/
+Disallow: /tmp
+Allow: /

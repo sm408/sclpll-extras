@@ -1,0 +1,33 @@
+[plugin]
+name = "feeds"
+version = "1.0.1"
+api = "sclpl/1"
+module = "feeds"
+description = "RSS and Atom feeds as rows, and a per-host robots.txt check."
+capabilities = ["network"]
+
+[[connector]]
+name = "feeds.rss_read"
+summary = "Parse a fetched RSS 2.0 or RSS 1.0 feed into rows."
+signature = "feeds.rss_read(response)"
+parameters = ["response"]
+
+[[connector]]
+name = "feeds.atom_read"
+summary = "Parse a fetched Atom feed into rows."
+signature = "feeds.atom_read(response)"
+parameters = ["response"]
+
+[[connector]]
+name = "feeds.feed_read"
+lane = "thread"
+summary = "Fetch a feed over HTTP(S) and parse it as RSS or Atom."
+signature = "feeds.feed_read(url, timeout=10.0, user_agent='sclpl', max_bytes=5000000)"
+parameters = ["url", "timeout", "user_agent", "max_bytes"]
+
+[[connector]]
+name = "feeds.robots_allowed"
+lane = "thread"
+summary = "Whether robots.txt lets a user agent fetch a URL. Cached per host."
+signature = "feeds.robots_allowed(url, user_agent='sclpl', timeout=10.0)"
+parameters = ["url", "user_agent", "timeout"]
